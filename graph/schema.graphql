@@ -1,0 +1,50 @@
+type Song {
+  id: String!
+  artist: String!
+  duration: String!
+  uri: String
+  lastModified: String
+  title: String!
+  album: String!
+  track: String
+#   date: String
+#   time: String
+}
+
+type Album {
+    name: String!
+    songs: [Song!]!
+}
+
+type Artist {
+    name: String!
+    albums: [Album!]!
+}
+
+type Playlist {
+    name: String!
+    songs: [Song!]!
+}
+
+input CreatePlaylist {
+    name: String!
+}
+
+type Query {
+    getSong(title: String!): Song
+    getAlbum(name: String!): Album
+    getArtist(name: String!): Artist
+    getPlaylist(name: String!): Playlist
+    listPlaylists: [Playlist!]!
+    
+    getCurrentPlaylist: Playlist
+    getAllArtists: [Artist!]!
+    getAllAlbums(name: String!): [Album!]!
+}
+
+type Mutation {
+    savePlaylist(name: String!): Playlist!
+    addToPlaylist(name: String!, uri: [String!]!): Playlist
+    addToNowPlaying(uri: [String!]!): Playlist
+    # deletePlaylist(name: String!): Playlist
+}
